@@ -1,1 +1,21 @@
-<h1> <%= @data["Envelope"]["Cube"]["Cube"][0]["Cube"] %> </h1>
+<br>
+<form action="/" method="post">
+  
+  Date:
+  <select name="index_number">
+    <% @data.each do |element| %>
+    <% date = element["time"]%>
+    <% find_index = @data.find { |element| element["time"] == date } %>
+    <% index_num = @data.index(find_index)%>
+    <option value="<%= index_num %>"> <%= date %> </option>
+    <% end%>
+  </select>
+  <br>
+  
+  Amount:
+  <input type="number" name="amount"  placeholder="input number" >
+  <br>
+
+  
+</form>
+<br>
