@@ -9,6 +9,7 @@ get "/" do
 end
 
 post '/' do
-  @result = params
+  exchange_rate = ExchangeRate.new()
+  @result = exchange_rate.exchange_rate(params)
   erb( :result)
 end
