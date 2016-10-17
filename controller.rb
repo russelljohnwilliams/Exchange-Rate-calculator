@@ -7,3 +7,8 @@ get "/" do
   @data = exchange_rate.parse_data()
   erb(:exchange_rate)
 end
+
+post '/' do
+  @result = params
+  erb( :result)
+end
