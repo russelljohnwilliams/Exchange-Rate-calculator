@@ -3,6 +3,7 @@ require('sinatra/contrib/all')
 require_relative('models/exchange_rate')
 
 get "/" do
-  @test = "Hello World!"
+  exchange_rate = ExchangeRate.new()
+  @data = exchange_rate.parse_data()
   erb(:exchange_rate)
 end
