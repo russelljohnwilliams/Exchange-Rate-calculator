@@ -1,6 +1,6 @@
 <br>
 <form action="/" method="post">
-  
+
   Date:
   <select name="index_number">
     <% @data.each do |element| %>
@@ -11,11 +11,30 @@
     <% end%>
   </select>
   <br>
-  
+
   Amount:
   <input type="number" name="amount"  placeholder="input number" >
   <br>
 
-  
+  From:
+  <select name="from">
+    <option >Select a currency</option>
+    <% cube = @data[0]["Cube"] %>
+    <% cube.each do |element| %>
+    <option value="<%= element['currency'] %>" ><%= element['currency'] %></option>
+    <% end %>
+  </select>
+  <br>
+
+  To:
+  <select name="to">
+    <option >Select a currency</option>
+    <% cube = @data[0]["Cube"] %>
+    <% cube.each do |element| %>
+    <option value="<%= element['currency'] %>"><%= element['currency'] %></option>
+    <% end %>
+  </select>
+  <br>
+  <input type="submit" value="Submit">
 </form>
 <br>
