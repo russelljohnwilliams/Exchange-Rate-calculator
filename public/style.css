@@ -1,18 +1,21 @@
+
 body{
   background: white;
-  color: black;
+  font-family: 'Work Sans', sans-serif;
+  color: steelblue;
+  font-size: 1.3rem;
 }
 
 
+
 /*-------------------
-    logo
+  logo
 -------------------*/
 
 .logo{
   width: 400px;
   height: 125px;
   position: relative;
-  font-family: 'Work Sans', sans-serif;
   font-size: 4rem;
   margin: 50px 0 0 70px;
 }
@@ -23,115 +26,48 @@ body{
   left: 0;
 }
 
-div :nth-child(2){
+.logo :nth-child(2){
   color: yellowgreen;
   clip: rect(0 400px 125px 100px);
 }
-div :nth-child(1){
+
+.logo :nth-child(1){
   color: steelblue;
   clip: rect(0 100px 125px 0);
 }
 
 
 /*-------------------
-    form
+  form
 -------------------*/
 
-.signup-form{
-  text-align: center;
+select, input, option, .button{
+  background: white;
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+  width: 250px;
+  font-size: 1rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -webkit-border-radius: 0px;
+  appearance: none;
+  color: yellowgreen;
 }
-
 
 input{
-  transition: all .9s;
-  background: white;
-  border: 1px solid black;
-  padding: 10px;
-  margin: 10px;
-  width: 20vw;
+  width: 100px;
 }
 
-/*input:focus {
-  transition: all .9s;
-  outline:none;
-  background-color: #929ca5;
-  color: white;
-}
-*/
-
-
-/*
-.login-form{
-  position: inline;
-  float: left;
-  width: 500px;
-  margin:0;
-  margin-top: 30px;
-  margin-left: 100px
+.select_date{
+  width: 175px;
 }
 
-.signup-form{
-  float: right;
-  width: 500px;
-  margin:0;
-  margin-top: 10px;
-  margin-right: 100px
-}
-
-.login-box{
-  margin-top: 30px;
-}
-
-.input-image-form{
-  margin-top: 70px;
-}*/
-
-option, select{
-  transition: all .9s;
-  background: white;
-  border: 1px solid black;
-  padding: 10px;
-  margin: 10px;
-  width: 20vw;
-  height: 40px;
-  -webkit-appearance: none;
-  -webkit-border-radius: 0px;
-  font-size: 1rem;
-  color: #444f59;
-}
-.styled-select select {
-  font-size: 14pt;
-  height: 10px;
-}
-
-select {
-  -webkit-appearance: none;
-  -webkit-border-radius: 0px;
-}
-
-
-button{
-  background: white;
-  border: 1px solid black;
-  padding: 10px;
-  margin: 10px;
-  width: 20vw;
-  color: #929ca5;
-  transition: all .9s;
-}
-
-/*button:hover{
-  transition: all .4s;
-  background-color: black;
-  color: white;
-}
-
-button:focus{
-  outline: none;
-  background-color: steelblue;
-}
-*/
 option:focus {
+  outline: none;
+}
+
+input:focus {
   outline: none;
 }
 
@@ -140,4 +76,49 @@ select:focus {
 }
 
 
+/*-------------------
+  form positioning
+-------------------*/
 
+.form{
+  padding: 10px;
+  margin-left: 50px;
+  width: 700px;
+}
+
+.date_amount{
+  float: left;
+  width: 40%;
+  text-align: right;
+}
+
+.ccy_selection{
+  float: right;
+  margin-top: 90px;
+  width: 59%;
+  text-align: right;
+}
+
+.to{
+  margin-right: 15px;
+}
+
+/*-------------------
+  button
+-------------------*/
+
+.button{
+  height: 40px;
+  margin-top: 90px;
+}
+
+.button:hover{
+  transition: all .2s;
+  background-color: lightblue;
+  color: white;
+}
+
+.button:focus{
+  outline: none;
+  background-color: steelblue;
+}

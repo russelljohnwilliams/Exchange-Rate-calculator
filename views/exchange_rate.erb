@@ -2,26 +2,27 @@
 <div class="form">
   <form action="/" method="post">
 
-    Date:
-    <select name="index_number">
-      <% @data.each do |element| %>
-      <% date = element["time"]%>
-      <% find_index = @data.find { |element| element["time"] == date } %>
-      <% index_num = @data.index(find_index)%>
-      <option value="<%= index_num %>"> <%= date %> </option>
-      <% end%>
-    </select>
-    <br>
-    
-    <div class="amount_input">
+    <div class="date_amount">
+      Date:
+      <select class="select_date" name="index_number">
+        <% @data.each do |element| %>
+        <% date = element["time"]%>
+        <% find_index = @data.find { |element| element["time"] == date } %>
+        <% index_num = @data.index(find_index)%>
+        <option value="<%= index_num %>"> <%= date %> </option>
+        <% end%>
+      </select>
+      <br>
+
+
       Amount:
-      <input type="number" name="amount"  value="1" placeholder="input number" >
+      <input type="number" name="amount"  value="100" placeholder="input number" >
       <br>
     </div>
 
     <div class="ccy_selection">
       From:
-      <select name="from">
+      <select class="from" name="from">
         <option value="GBP">GBP</option>
         <% cube = @data[0]["Cube"] %>
         <% cube.each do |element| %>
@@ -31,17 +32,16 @@
       <br>
 
       To:
-      <select name="to">
-        <option value="USD" >USD</option>
+      <select class="to" name="to">
         <% cube = @data[0]["Cube"] %>
         <% cube.each do |element| %>
         <option value="<%= element['currency'] %>"><%= element['currency'] %></option>
         <% end %>
       </select>
     </div>
-    
+
     <br>
-    <input type="submit" value="Submit">
+    <input class="button" type="submit" value="Convert">
   </form>
 </div>
 
