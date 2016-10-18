@@ -15,7 +15,7 @@ body{
   height: 125px;
   position: relative;
   font-size: 4rem;
-  margin: 50px 0 0 70px;
+  margin: 50px 0 0 100px;
 }
 
 .logo>span{
@@ -44,7 +44,7 @@ select, input, option, .button{
   border: 1px solid black;
   padding: 10px;
   margin: 10px;
-  width: 250px;
+  width: 220px;
   font-size: 1rem;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -54,7 +54,7 @@ select, input, option, .button{
 }
 
 select{
-  background-image:url("/drop-down-icon-lime.png");
+  background-image:url("/img/drop-down-icon-lime.png");
   background-repeat: no-repeat;
   background-position: 95% 50%;
   background-size: 18px;
@@ -87,7 +87,7 @@ select:focus {
 
 .form{
   padding: 10px;
-  margin-left: 50px;
+  margin-left: 100px;
   width: 700px;
 }
 
@@ -97,7 +97,7 @@ select:focus {
   text-align: right;
 }
 
-.ccy_selection{
+.select_currency{
   float: right;
   margin-top: 61px;
   width: 59%;
@@ -142,7 +142,7 @@ select:focus {
 -------------------*/
 
 .results{
-  margin: 50px;
+  margin: 25px 0 0 85px;
   padding-left: 20px;
 }
 

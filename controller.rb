@@ -8,7 +8,7 @@ get "/" do
   erb(:exchange_rate)
 end
 
-post '/' do
+post '/result' do
   exchange_rate = ExchangeRate.new(params)
   @result = exchange_rate.at()
   erb( :result)
