@@ -42,7 +42,7 @@ class ExchangeRate
     step_one = @amount / from_amount
     step_two = step_one * to_amount
 
-    return "index number: ", @i, "amount to exchange: ", @amount, "currency & rate to exchanghe from: ", @from_ccy, from_amount, "currency & rate to exchanghe to: ", @to_ccy, to_amount, "final exchange rate amount: ", step_two
+    return @amount, @from_ccy, from_amount, @to_ccy, to_amount, step_two
   end
 
 end
