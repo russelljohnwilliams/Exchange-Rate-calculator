@@ -6,8 +6,6 @@ body{
   font-size: 1.3rem;
 }
 
-
-
 /*-------------------
   logo
 -------------------*/
@@ -55,6 +53,13 @@ select, input, option, .button{
   color: yellowgreen;
 }
 
+select{
+  background-image:url("/drop-down-icon-lime.png");
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  background-size: 18px;
+}
+
 input{
   width: 100px;
 }
@@ -94,7 +99,7 @@ select:focus {
 
 .ccy_selection{
   float: right;
-  margin-top: 90px;
+  margin-top: 61px;
   width: 59%;
   text-align: right;
 }
@@ -110,6 +115,10 @@ select:focus {
 .button{
   height: 40px;
   margin-top: 90px;
+  width: 100px;
+  -webkit-box-shadow: 5px 5px 4px -2px rgba(61,61,61,0.57);
+  -moz-box-shadow: 5px 5px 4px -2px rgba(61,61,61,0.57);
+  box-shadow: 5px 5px 4px -2px rgba(61,61,61,0.57);
 }
 
 .button:hover{
@@ -121,4 +130,31 @@ select:focus {
 .button:focus{
   outline: none;
   background-color: steelblue;
+  margin: 90px 7px 10px 13px;
+  -webkit-box-shadow: 0px 0px 0px 0px rgba(61,61,61,0.57);
+  -moz-box-shadow: 0px 0px 0px 0px rgba(61,61,61,0.57);
+  box-shadow: 0px 0px 0px 0px rgba(61,61,61,0.57);
 }
+
+
+/*-------------------
+  results page
+-------------------*/
+
+.results{
+  margin: 50px;
+  padding-left: 20px;
+}
+
+h3{
+  display: inline;
+  width:150px;
+}
+
+
+
+
+
+
+
+
