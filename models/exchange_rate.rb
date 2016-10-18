@@ -8,7 +8,7 @@ class ExchangeRate
   def initialize(options)
     received = HTTParty.get("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml")
     @data = received["Envelope"]["Cube"]["Cube"]
-  
+    
     @i = options['i'].to_i
     @amount = options['amount'].to_f
     @from_ccy = options['from']
@@ -42,7 +42,7 @@ class ExchangeRate
     step_one = @amount / from_amount
     step_two = step_one * to_amount
 
-    return "index number: ", @i, "amount to exchange: ", @amount, "currency & rate to exchanghe from: ", @from_ccy, from_amount, "currency & rate to exchanghe to: ", @to_ccy, to_amount
+    return "index number: ", @i, "amount to exchange: ", @amount, "currency & rate to exchanghe from: ", @from_ccy, from_amount, "currency & rate to exchanghe to: ", @to_ccy, to_amount, "final exchange rate amount: ", step_two
   end
 
 end

@@ -1,40 +1,47 @@
 <br>
-<form action="/" method="post">
+<div class="form">
+  <form action="/" method="post">
 
-  Date:
-  <select name="index_number">
-    <% @data.each do |element| %>
-    <% date = element["time"]%>
-    <% find_index = @data.find { |element| element["time"] == date } %>
-    <% index_num = @data.index(find_index)%>
-    <option value="<%= index_num %>"> <%= date %> </option>
-    <% end%>
-  </select>
-  <br>
+    Date:
+    <select name="index_number">
+      <% @data.each do |element| %>
+      <% date = element["time"]%>
+      <% find_index = @data.find { |element| element["time"] == date } %>
+      <% index_num = @data.index(find_index)%>
+      <option value="<%= index_num %>"> <%= date %> </option>
+      <% end%>
+    </select>
+    <br>
+    
+    <div class="amount_input">
+      Amount:
+      <input type="number" name="amount"  value="1" placeholder="input number" >
+      <br>
+    </div>
 
-  Amount:
-  <input type="number" name="amount"  placeholder="input number" >
-  <br>
+    <div class="ccy_selection">
+      From:
+      <select name="from">
+        <option value="GBP">GBP</option>
+        <% cube = @data[0]["Cube"] %>
+        <% cube.each do |element| %>
+        <option value="<%= element['currency'] %>" ><%= element['currency'] %></option>
+        <% end %>
+      </select>
+      <br>
 
-  From:
-  <select name="from">
-    <option >Select a currency</option>
-    <% cube = @data[0]["Cube"] %>
-    <% cube.each do |element| %>
-    <option value="<%= element['currency'] %>" ><%= element['currency'] %></option>
-    <% end %>
-  </select>
-  <br>
+      To:
+      <select name="to">
+        <option value="USD" >USD</option>
+        <% cube = @data[0]["Cube"] %>
+        <% cube.each do |element| %>
+        <option value="<%= element['currency'] %>"><%= element['currency'] %></option>
+        <% end %>
+      </select>
+    </div>
+    
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+</div>
 
-  To:
-  <select name="to">
-    <option >Select a currency</option>
-    <% cube = @data[0]["Cube"] %>
-    <% cube.each do |element| %>
-    <option value="<%= element['currency'] %>"><%= element['currency'] %></option>
-    <% end %>
-  </select>
-  <br>
-  <input type="submit" value="Submit">
-</form>
-<br>
