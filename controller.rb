@@ -10,6 +10,6 @@ end
 
 post '/' do
   exchange_rate = ExchangeRate.new(params)
-  @result = exchange_rate.exchange_rate()
+  @result = exchange_rate.at()
   erb( :result)
 end
