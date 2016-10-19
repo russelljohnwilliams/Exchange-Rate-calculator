@@ -2,11 +2,11 @@ require('sinatra')
 require('sinatra/contrib/all')
 require_relative('models/exchange_rate')
 
-get "/" do
+get "/test" do
   exchange_rate = ExchangeRate.new(params)
   exchange_rate.get_url_data()
   @data = exchange_rate.parsed_data()
-  erb(:exchange_rate)
+  erb(:test)
 end
 
 post '/result' do
