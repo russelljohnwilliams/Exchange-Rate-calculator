@@ -1,10 +1,8 @@
-require ('active_support')
+# require ('active_support')
 require ('httparty')
 require ('xmlsimple')
-require ('json')
-require ("rexml/document")
 require ('open-uri')
-require('nokogiri')
+require ('net/http')
 
 class ExchangeRate
 
@@ -17,49 +15,26 @@ class ExchangeRate
     @to_ccy = options['to']
   end
 
+  def start()
+    url = 'http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml'
+    res = Net::HTTP.get_response(URI.parse(url.to_s))
+    if res.code == "200"
+      self.get_url_data()
+    else
+      self.parse_data()
+    end
+  end
+
   def get_url_data()
-    # my_hash = HTTParty.get("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml")
-    # data = my_hash["Envelope"]["Cube"]["Cube"]
     data = open("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml").read
     somefile = File.open("data.xml", "w")
     somefile.write(data)
-    # somefile.puts data
     somefile.close
+    self.parse_data
   end
 
   def parse_data()
-    received = HTTParty.get("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml")
-    # data = received["Envelope"]["Cube"]["Cube"]
-    return data
-  end
-
-  def parsed_data()
-    # data = self.parse_data()
-    # file = File.open("data.txt", "r")
-    
     data = XmlSimple.xml_in('data.xml')
-    # hash = HTTParty.get('data.xml')
-
-    # fname = "data.xml"
-    # somefile = File.open(fname, "r")
-    # data = somefile.read
-    # puts data
-
-    # data = File.open("data.xml") { |f| Nokogiri::XML(f) }
-
-    # data2 = JSON.parse('data')
-
-    # file = File.open("data.xml")
-    # doc = REXML::Document.new file
-    # file.close
-    # data = doc
-
-    # file = File.read('file-name-to-be-read.json')
-    # data_hash = JSON.parse(file)
-
-
-
-
     return data["Cube"][0]["Cube"]
   end
 
