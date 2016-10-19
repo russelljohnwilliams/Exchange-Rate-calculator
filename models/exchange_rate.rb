@@ -11,59 +11,59 @@ class ExchangeRate
   def initialize(options)
     @i = options['i'].to_i
     @amount = options['amount'].to_f
-    @from_ccy = options['from']
-    @to_ccy = options['to']
+    @from_currency = options['from']
+    @to_currency = options['to']
   end
 
   def start()
     url = 'http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml'
     res = Net::HTTP.get_response(URI.parse(url.to_s))
     if res.code == "200"
-      self.get_url_data()
+      self.get_xr_data()
     else
       self.parse_data()
     end
   end
 
-  def get_url_data()
+  def get_xr_data()
     data = open("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml").read
-    somefile = File.open("data.xml", "w")
-    somefile.write(data)
-    somefile.close
+    local_file = File.open("data.xml", "w")
+    local_file.write(data)
+    local_file.close
     self.parse_data
   end
 
   def parse_data()
-    data = XmlSimple.xml_in('data.xml')
-    return data["Cube"][0]["Cube"]
+    local_file = XmlSimple.xml_in('data.xml')
+    return local_file["Cube"][0]["Cube"]
   end
 
-  def get_rate_of_from_ccy()
+  def from_currency_rate()
     @data = self.parse_data()
     cube = @data[@i]["Cube"]
-    find_from_index = cube.find{ |element| element["currency"] == @from_ccy}
-    int = cube.index(find_from_index)
+    from_index_num = cube.find{ |element| element["currency"] == @from_currency}
+    int = cube.index(from_index_num)
     from_rate = cube[int]["rate"].to_f
     return from_rate
   end
 
-  def get_rate_of_to_ccy()
+  def to_currency_rate()
     @data = self.parse_data()
     cube = @data[@i]["Cube"]
-    find_to_index = cube.find{ |element| element["currency"] == @to_ccy}
-    int = cube.index(find_to_index)
+    to_index_num = cube.find{ |element| element["currency"] == @to_currency}
+    int = cube.index(to_index_num)
     to_rate = cube[int]["rate"].to_f
     return to_rate
   end
 
-  def at()
-    from_rate = self.get_rate_of_from_ccy()
-    to_rate = self.get_rate_of_to_ccy()
+  def calculate_rate()
+    from_rate = self.from_currency_rate()
+    to_rate = self.to_currency_rate()
 
     step_one = @amount / from_rate
     result = step_one * to_rate
 
-    return @amount, @from_ccy, from_rate, @to_ccy, to_rate, result
+    return @amount, @from_currency, from_rate, @to_currency, to_rate, result
   end
 
 end
