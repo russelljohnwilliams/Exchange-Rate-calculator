@@ -1,4 +1,3 @@
-# require ('active_support')
 require ('httparty')
 require ('xmlsimple')
 require ('open-uri')
@@ -17,8 +16,8 @@ class ExchangeRate
 
   def start()
     url = 'http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml'
-    res = Net::HTTP.get_response(URI.parse(url.to_s))
-    if res.code == "200"
+    response = Net::HTTP.get_response(URI.parse(url.to_s))
+    if response.code == "200"
       self.get_xr_data()
     else
       self.parse_data()
@@ -38,32 +37,21 @@ class ExchangeRate
     return local_file["Cube"][0]["Cube"]
   end
 
-  def from_currency_rate()
+  def find_currency_rate(currency)
     @data = self.parse_data()
     cube = @data[@i]["Cube"]
-    from_index_num = cube.find{ |element| element["currency"] == @from_currency}
-    int = cube.index(from_index_num)
-    from_rate = cube[int]["rate"].to_f
-    return from_rate
-  end
-
-  def to_currency_rate()
-    @data = self.parse_data()
-    cube = @data[@i]["Cube"]
-    to_index_num = cube.find{ |element| element["currency"] == @to_currency}
-    int = cube.index(to_index_num)
-    to_rate = cube[int]["rate"].to_f
-    return to_rate
+    index_num = cube.find{ |element| element["currency"] == currency}
+    i = cube.index(index_num)
+    rate = cube[i]["rate"].to_f
+    return rate
   end
 
   def calculate_rate()
-    from_rate = self.from_currency_rate()
-    to_rate = self.to_currency_rate()
-
+    from_rate = self.find_currency_rate(@from_currency)
+    to_rate = self.find_currency_rate(@to_currency)
     step_one = @amount / from_rate
     result = step_one * to_rate
-
-    return @amount, @from_currency, from_rate, @to_currency, to_rate, result
+    return @amount, @from_currency, @to_currency, result
   end
 
 end
