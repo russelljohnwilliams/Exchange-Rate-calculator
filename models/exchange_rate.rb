@@ -6,43 +6,49 @@ class ExchangeRate
   attr_reader(:i, :amount, :from, :to)
 
   def initialize(options)
-    received = HTTParty.get("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml")
-    @data = received["Envelope"]["Cube"]["Cube"]
-    
     @i = options['i'].to_i
     @amount = options['amount'].to_f
     @from_ccy = options['from']
     @to_ccy = options['to']
   end
-  
+
   def parse_data()
-    return @data
+    received = HTTParty.get("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml")
+    data = received["Envelope"]["Cube"]["Cube"]
+    return data
   end
 
-  def get_index_of_from_ccy()
+  def parsed_data()
+    data = self.parse_data()
+    return data
+  end
+
+  def get_rate_of_from_ccy()
+    @data = self.parse_data()
     cube = @data[@i]["Cube"]
     find_from_index = cube.find{ |element| element["currency"] == @from_ccy}
-    x = cube.index(find_from_index)
-    from_amount = cube[x]["rate"].to_f
-    return from_amount
+    int = cube.index(find_from_index)
+    from_rate = cube[int]["rate"].to_f
+    return from_rate
   end
 
-  def get_index_of_to_ccy()
+  def get_rate_of_to_ccy()
+    @data = self.parse_data()
     cube = @data[@i]["Cube"]
     find_to_index = cube.find{ |element| element["currency"] == @to_ccy}
-    y = cube.index(find_to_index)
-    to_amount = cube[y]["rate"].to_f
-    return to_amount
+    int = cube.index(find_to_index)
+    to_rate = cube[int]["rate"].to_f
+    return to_rate
   end
 
   def at()
-    from_amount = self.get_index_of_from_ccy()
-    to_amount = self.get_index_of_to_ccy()
+    from_rate = self.get_rate_of_from_ccy()
+    to_rate = self.get_rate_of_to_ccy()
 
-    step_one = @amount / from_amount
-    step_two = step_one * to_amount
+    step_one = @amount / from_rate
+    result = step_one * to_rate
 
-    return @amount, @from_ccy, from_amount, @to_ccy, to_amount, step_two
+    return @amount, @from_ccy, from_rate, @to_ccy, to_rate, result
   end
 
 end
