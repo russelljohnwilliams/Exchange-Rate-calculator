@@ -4,6 +4,7 @@ require_relative('models/exchange_rate')
 
 get "/" do
   exchange_rate = ExchangeRate.new(params)
+  exchange_rate.get_url_data()
   @data = exchange_rate.parsed_data()
   erb(:exchange_rate)
 end

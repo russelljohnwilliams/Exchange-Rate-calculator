@@ -1,5 +1,6 @@
 require ('active_support')
 require ('httparty')
+require ('open-uri')
 
 class ExchangeRate
 
@@ -12,13 +13,28 @@ class ExchangeRate
     @to_ccy = options['to']
   end
 
+  def get_url_data()
+
+    xml = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml"
+
+    remote_data = open(xml).read
+    my_local_file = open("data.xml", "w") 
+
+    my_local_file.write(remote_data)
+    my_local_file.close
+
+
+  end
+
   def parse_data()
-    received = HTTParty.get("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml")
+    received = HTTParty.get("data.xml")
     data = received["Envelope"]["Cube"]["Cube"]
     return data
   end
 
   def parsed_data()
+    
+
     data = self.parse_data()
     return data
   end
